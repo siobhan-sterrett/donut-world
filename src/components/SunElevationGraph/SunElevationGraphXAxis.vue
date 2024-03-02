@@ -6,9 +6,9 @@ import SunElevationGraphXAxisTick from './SunElevationGraphXAxisTick.vue';
 
 const yValue = yTransform(0);
 const minX = xTransform(0);
-const maxX = xTransform(24);
-const hourTickValues = range(25);
-const hourLabelValues = range(4, 25, 4);
+const maxX = xTransform(48);
+const hourTickValues = range(49);
+const hourLabelValues = range(4, 49, 4);
 </script>
 
 <template>

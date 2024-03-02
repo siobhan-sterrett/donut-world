@@ -1,12 +1,3 @@
-export type WorldParams = {
-    aspectRatio: number;
-};
-
-export type ViewerLocation = {
-    azimuth: number;
-    latitude: number;
-}
-
 export function debounce<T extends readonly unknown[]>(fn: (...args: [...T]) => void, delay: number): (...args: [...T]) => void {
     let timer: number | undefined;
 

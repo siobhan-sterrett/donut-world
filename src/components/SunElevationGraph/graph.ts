@@ -1,5 +1,5 @@
 export function xTransform(hour: number): number {
-    return hour * 50;
+    return hour * 25;
 }
 
 export function yTransform(degree: number): number {
