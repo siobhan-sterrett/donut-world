@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import SpaceView from './components/SpaceView.vue';
-import SunElevationGraph from './components/SunElevationGraph/SunElevationGraph.vue';
+import { SpaceView } from './components/SpaceView';
+import { SunElevationGraph } from './components/SunElevationGraph';
 
 import type { SceneParams } from './params';
 import ParameterControls from './components/ParameterControls.vue';
