@@ -12,8 +12,7 @@ export type WorldParams = {
 }
 
 export type SunParams = {
-    majorAxis: number;
-    minorAxis: number;
+    orbitalRadius: number;
 }
 
 export type ViewerParams = {
@@ -22,15 +21,15 @@ export type ViewerParams = {
 }
 
 export function sunPath(sunParams: SunParams): (hour: number) => Vector3 {
-    const { majorAxis: a, minorAxis: b } = sunParams;
+    const { orbitalRadius: a } = sunParams;
 
     return (hour: number): Vector3 => {
         // One cycle of the sun is 48 hours
         const t = hour / 24 * Math.PI;
 
-        const denominator = (1 + Math.pow(a * Math.cos(t) / b, 2));
-        const x = a * Math.sin(t) / denominator;
-        const z = a * a / b * Math.sin(t) * Math.cos(t) / denominator;
+        const denominator = 1 + Math.pow(Math.sin(t), 2);
+        const x = a * Math.cos(t) / denominator;
+        const z = a * Math.sin(t) * Math.cos(t) / denominator;
 
         return new Vector3(x, 0, z);
     }

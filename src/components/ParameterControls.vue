@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const worldMajorRadius = defineModel<number>('worldMajorRadius');
 const worldMinorRadius = defineModel<number>('worldMinorRadius');
-const sunMajorAxis = defineModel<number>('sunMajorAxis');
-const sunMinorAxis = defineModel<number>('sunMinorAxis');
+const sunOrbitalRadius = defineModel<number>('sunOrbitalRadius');
 const viewerAzimuth = defineModel<number>('viewerAzimuth');
 const viewerLatitude = defineModel<number>('viewerLatitude');
 </script>
@@ -23,12 +22,8 @@ const viewerLatitude = defineModel<number>('viewerLatitude');
         <div class="form-entry-collection">
             <header>Sun Parameters</header>
             <div class="form-entry">
-                <label>Major Axis</label>
-                <input type="number" min="0.0" step="0.1" v-model="sunMajorAxis" />
-            </div>
-            <div class="form-entry">
-                <label>Minor Axis</label>
-                <input type="number" min="0.0" step="0.1" v-model="sunMinorAxis" />
+                <label>Orbital Radius</label>
+                <input type="number" min="0.0" step="0.1" v-model="sunOrbitalRadius" />
             </div>
         </div>
         <div class="form-entry-collection">

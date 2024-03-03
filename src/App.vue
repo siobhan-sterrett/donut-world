@@ -12,8 +12,7 @@ const params = ref<SceneParams>({
     minorRadius: 3,
   },
   sun: {
-    majorAxis: 15,
-    minorAxis: 15,
+    orbitalRadius: 15,
   },
   viewer: {
     azimuth: 0,
@@ -30,8 +29,7 @@ const params = ref<SceneParams>({
   <ParameterControls 
     v-model:worldMajorRadius="params.world.majorRadius"
     v-model:worldMinorRadius="params.world.minorRadius" 
-    v-model:sunMajorAxis="params.sun.majorAxis" 
-    v-model:sunMinorAxis="params.sun.minorAxis" 
+    v-model:sunOrbitalRadius="params.sun.orbitalRadius"
     v-model:viewerAzimuth="params.viewer.azimuth" 
     v-model:viewerLatitude="params.viewer.latitude" 
   />
