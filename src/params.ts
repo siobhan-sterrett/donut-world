@@ -35,6 +35,21 @@ export function sunPath(sunParams: SunParams): (hour: number) => Vector3 {
     }
 }
 
+export function viewerPosition(worldParams: WorldParams, viewerParams: ViewerParams): Vector3 {
+    const { majorRadius, minorRadius } = worldParams;
+    const { azimuth, latitude } = viewerParams;
+
+    // Calculate position at latitude, at azimuth = 0
+    const position = new Vector3(majorRadius, 0, 0).add({
+        x: minorRadius * Math.cos(latitude * Math.PI / 180),
+        y: 0,
+        z: minorRadius * Math.sin(latitude * Math.PI / 180)
+    });
+
+    // Rotate to azimuth
+    return position.applyMatrix4(new Matrix4().makeRotationZ(azimuth * Math.PI / 180));
+}
+
 export function viewerTransform(worldParams: WorldParams, viewerParams: ViewerParams): (sunPosition: Vector3) => Vector3 {
     return (sunPosition: Vector3): Vector3 => {
         const position = sunPosition.clone();

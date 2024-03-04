@@ -1,17 +1,19 @@
-import { sunPath, type SceneParams, type WorldParams, type SunParams } from "@/params";
+import { sunPath, type SceneParams, type WorldParams, type SunParams, type ViewerParams, viewerPosition } from "@/params";
 import { range } from "@/util";
-import { BufferGeometry, Camera, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, PerspectiveCamera, Scene, TorusGeometry, WebGLRenderer, type Renderer, Vector3 } from "three"
+import { BufferGeometry, Camera, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, PerspectiveCamera, Scene, TorusGeometry, WebGLRenderer, type Renderer, Vector3, SphereGeometry } from "three"
 
 export class SpaceViewScene {
     scene: Scene = new Scene();
     renderer: Renderer = new WebGLRenderer();
     world: Mesh = new Mesh();
     sunPath: Line = new Line();
+    viewer: Mesh = new Mesh();
     camera: Camera = new PerspectiveCamera();
 
     constructor() {
         this.scene.add(this.world);
         this.scene.add(this.sunPath);
+        this.scene.add(this.viewer);
     }
 
     setCanvas(canvas: HTMLCanvasElement) {
@@ -37,12 +39,24 @@ export class SpaceViewScene {
         return new Line(sunPathGeometry, sunPathMaterial);
     }
 
+    #createViewer(world: WorldParams, viewer: ViewerParams): Mesh {
+        const viewerGeometry = new SphereGeometry(world.minorRadius / 10);
+        const viewerMaterial = new MeshBasicMaterial({ color: 0x00ff00 });
+        const viewerObject = new Mesh(viewerGeometry, viewerMaterial);
+
+        const position = viewerPosition(world, viewer);
+        viewerObject.position.set(position.x, position.y, position.z);
+        return viewerObject;
+    }
+
     updateParams(params: SceneParams) {
-        this.scene.remove(this.world, this.sunPath);
+        this.scene.remove(this.world, this.sunPath, this.viewer);
         this.world = this.#createWorld(params.world);
         this.scene.add(this.world);
         this.sunPath = this.#createSunPath(params.sun);
         this.scene.add(this.sunPath);
+        this.viewer = this.#createViewer(params.world, params.viewer);
+        this.scene.add(this.viewer);
     }
 
     render() {

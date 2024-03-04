@@ -30,11 +30,11 @@ const viewerLatitude = defineModel<number>('viewerLatitude');
             <header>Viewer Location</header>
             <div class="form-entry">
                 <label>Azimuth</label>
-                <input type="number" min="0.0" max="360.0" step="0.1" v-model="viewerAzimuth" />
+                <input type="number" min="-360" max="360" step="1" v-model="viewerAzimuth" />
             </div>
             <div class="form-entry">
                 <label>Latitude</label>
-                <input type="number" min="-180.0" max="180.0" step="0.1" v-model="viewerLatitude" />
+                <input type="number" min="-180" max="180" step="1" v-model="viewerLatitude" />
             </div>
         </div>
     </div>
