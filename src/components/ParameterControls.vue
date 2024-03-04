@@ -1,9 +1,15 @@
 <script setup lang="ts">
-const worldMajorRadius = defineModel<number>('worldMajorRadius');
+const worldMajorRadius = defineModel<number>('worldMajorRadius',);
 const worldMinorRadius = defineModel<number>('worldMinorRadius');
 const sunOrbitalRadius = defineModel<number>('sunOrbitalRadius');
-const viewerAzimuth = defineModel<number>('viewerAzimuth');
-const viewerLatitude = defineModel<number>('viewerLatitude');
+const viewerAzimuth = defineModel<number>('viewerAzimuth', {
+    get(value) { return Math.round(value * 180 / Math.PI) },
+    set(value) { return value * Math.PI / 180; }
+});
+const viewerLatitude = defineModel<number>('viewerLatitude', {
+    get(value) { return Math.round(value * 180 / Math.PI) },
+    set(value) { return value * Math.PI / 180; }
+});
 </script>
 
 <template>

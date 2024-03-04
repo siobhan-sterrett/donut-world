@@ -41,22 +41,22 @@ export function viewerPosition(worldParams: WorldParams, viewerParams: ViewerPar
 
     // Calculate position at latitude, at azimuth = 0
     const position = new Vector3(majorRadius, 0, 0).add({
-        x: minorRadius * Math.cos(latitude * Math.PI / 180),
+        x: minorRadius * Math.cos(latitude),
         y: 0,
-        z: minorRadius * Math.sin(latitude * Math.PI / 180)
+        z: minorRadius * Math.sin(latitude)
     });
 
     // Rotate to azimuth
-    return position.applyMatrix4(new Matrix4().makeRotationZ(azimuth * Math.PI / 180));
+    return position.applyMatrix4(new Matrix4().makeRotationZ(azimuth));
 }
 
 export function viewerTransform(worldParams: WorldParams, viewerParams: ViewerParams): (sunPosition: Vector3) => Vector3 {
     return (sunPosition: Vector3): Vector3 => {
         const position = sunPosition.clone();
         return position
-            .applyMatrix4(new Matrix4().makeRotationZ(-viewerParams.azimuth * Math.PI / 180))
+            .applyMatrix4(new Matrix4().makeRotationZ(-viewerParams.azimuth))
             .applyMatrix4(new Matrix4().makeTranslation(-worldParams.majorRadius, 0, 0))
-            .applyMatrix4(new Matrix4().makeRotationY(viewerParams.latitude * Math.PI / 180 - Math.PI / 2))
+            .applyMatrix4(new Matrix4().makeRotationY(viewerParams.latitude - Math.PI / 2))
             .applyMatrix4(new Matrix4().makeTranslation(0, 0, -worldParams.minorRadius));
     }
 }
